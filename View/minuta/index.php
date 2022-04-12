@@ -37,12 +37,12 @@
                         </table>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered dataTable js-exportable">
+                        <table id="example1" class="table table-bordered ">
                             <thead>
                                 <tr class="active">
                                     <th class="text-center" WIDTH="10%">Fecha</th>
                                     <th class="text-center" WIDTH="10%">Hora</th>
-                                    <th class="text-center" WIDTH="40%">Asunto</th>
+                                    <th class="text-center" WIDTH="20%">Asunto</th>
                                     <th class="text-center" WIDTH="40%">Observación</th>
                                 </tr>
                             </thead>
@@ -50,7 +50,7 @@
                                 <tr>
                                     <th class="text-center" WIDTH="10%">Fecha</th>
                                     <th class="text-center" WIDTH="10%">Hora</th>
-                                    <th class="text-center" WIDTH="40%">Asunto</th>
+                                    <th class="text-center" WIDTH="20%">Asunto</th>
                                     <th class="text-center" WIDTH="40%">Observación</th>
                                 </tr>
                             </tfoot>

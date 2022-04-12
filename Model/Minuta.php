@@ -99,6 +99,75 @@ class Minuta
 
     }
 
+	public function Actualizar_inv($data)
+    {
+
+        $cantidad = $data->cantidad;
+        $item = $data->item;
+        $estado = $data->estado;
+        $novedad = $data->novedad;
+        $actualizacion = $data->actualizacion;
+        $id = $data->id;
+
+        try
+        {
+            $sql = "UPDATE  inventarios SET cantidad= $cantidad, item='$item', estado='$estado', novedad='$novedad', actualizacion='$actualizacion' WHERE id = $id";
+
+            $this->pdo->prepare($sql)->execute();
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+	public function Registrar_inv($data)
+    {
+        // print_r($data);
+        //exit();
+        try
+        {
+            $sql = "INSERT INTO inventarios (puesto_id,cantidad,item,estado,novedad,creacion,actualizacion)
+		        VALUES (?, ?, ?, ?, ?, ?, ? )";
+
+            $this->pdo->prepare($sql)
+                ->execute(
+                    array(
+                        $data->puesto_id,
+                        $data->cantidad,
+                        $data->item,
+                        $data->estado,
+                        $data->novedad = 'null',
+                        $data->creacion,
+                        $data->actualizacion = 'null',
+                    )
+                );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+	public function Guarda_Tramite($data)
+    {
+        // print_r($data);
+        //exit();
+        try
+        {
+            $sql = "INSERT INTO control_puestos (tramite,portero_id,puesto_id,f_entrega,h_entrega,observacion)
+		        VALUES (?, ?, ?, ?, ?, ?)";
+
+            $this->pdo->prepare($sql)
+                ->execute(
+                    array(
+                        $data->tramite,
+                        $data->portero_id,
+                        $data->puesto_id,
+                        $data->f_entrega,
+                        $data->h_entrega,
+                        $data->observacion,
+                    )
+                );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
 
 
@@ -238,7 +307,7 @@ class Minuta
 
 
 
-	public function Registrar(Inmueble $data)
+	public function Registrar( $data)
 	{
 	    //print_r($data);
 	    //exit();

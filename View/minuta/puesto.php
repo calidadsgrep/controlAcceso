@@ -21,7 +21,7 @@ if ($cant == 0) {
                 </h3>
             </div>
             <div class="card-body">
-                <form action="?c=Control_ingreso&a=add_tramite" method="POST">
+                <form action="?c=minutas&a=add_tramite" method="POST">
                     <div class="row clearfix">
                         <!--columna 1-->
                         <div class="col-sm-4 text-center">
