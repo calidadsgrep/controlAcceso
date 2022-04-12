@@ -1,5 +1,5 @@
 <?php
-echo 'hola';
+
 class Database
 {
     public static function StartUp()
