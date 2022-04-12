@@ -116,7 +116,7 @@ if ($cant == 0) {
                                         <td><?php echo ucwords($inventario->estado) ?></td>
                                         <td><?php echo ucwords($inventario->usuario) ?></td>
                                         <td>
-                                            <a onclick="Update(<?php echo $inventario->id ?>);" class="" data-toggle="modal" data-target="#smallModal"><i class="material-icons">edit</i></a>
+                                            <a onclick="Update(<?php echo $inventario->id ?>);" class="" data-toggle="modal" data-target="#smallModal"><i class="fa fa-edit"></i></a>
                                             <!-- <a onclick="javascript:return confirm('Estas seguro que deseas eliminar el registro?')" href="?c=control_ingreso&a=Eliminar&id=<?php echo $inventario->id ?>"> <i class="material-icons">clear</i></a>-->
                                         </td>
                                     </tr>
