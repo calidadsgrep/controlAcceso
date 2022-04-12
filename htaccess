@@ -1,0 +1,9 @@
+AddType application/x-httpd-ea-php56 .php
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Este dominio hereda el paquete “PHP”.
+# php -- END cPanel-generated handler, do not edit
