@@ -168,7 +168,18 @@ class Minuta
             die($e->getMessage());
         }
     }
+	public function Update($id)
+    {
+        try
+        {
+            $stm = $this->pdo->prepare("SELECT inventarios.* FROM  inventarios WHERE id = ?");
+            $stm->execute(array($id));
+            return $stm->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
 
+    }
 
 
 

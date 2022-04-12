@@ -41,15 +41,17 @@ class MinutasController
         @$alma->creacion = date('Y-m-d');
         @$alma->novedad = $_REQUEST['actualizacion'] . '/' . $_REQUEST['novedad'];
         @$alma->actualizacion = $_REQUEST['actualizacion'];
-        $this->model->Registrar_inv($alma);
 
-        // header('Location:?c=Control_ingreso&a=puesto');
+       
+        $alma->id > 0
+        ? $this->model->Actualizar_inv($alma)
+        : $this->model->Registrar_inv($alma); 
+      
 
         echo '<script>
                   alert("El registro del item de inventario de puesto se realizo con éxito.");
                    window.location = "?c=minutas&a=puesto";
-                </script>
-            ';
+                </script>';
     }
 
     public function Add_tramite()
@@ -70,4 +72,17 @@ class MinutasController
                 </script>
             ';
     }
-}
+
+
+    public function Crud(){
+        $alm = new Minuta();
+
+        if (isset($_REQUEST['item_id'])) {
+            $alm = $this->model->Update($_REQUEST['item_id']);
+        }
+           
+        require_once 'View/minuta/inv_editar.php';
+        
+    }
+    
+ }

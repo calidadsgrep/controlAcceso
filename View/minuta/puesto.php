@@ -147,7 +147,22 @@ if ($cant == 0) {
         </div>
     </div>
 </div>
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="smallModalLabel"></h4>
+                        </div>
+                        <div class="modal-body update " id="update">
 
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 <script>
     function Index(val)
         {
@@ -168,7 +183,7 @@ if ($cant == 0) {
             $('#update').html("<h5>Cargando Complementos</h5>");
             $.ajax({
                 type: "POST",
-                url: '?c=Control_ingreso&a=crud',
+                url: '?c=minutas&a=crud',
                 data: 'item_id='+val,
                 success: function(resp){
                     $('#update').html(resp);
