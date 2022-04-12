@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="#" class="dropdown-item">Tipo Vehiculos</a></li>
                 <li><a href="#" class="dropdown-item">Tipo Inmuebles</a></li>
                 <li><a href="?c=consignas&a=index" class="dropdown-item">Consignas</a></li>
-                <li><a href="?c=minuta&a=index" class="dropdown-item">Minuta</a></li>
+                <li><a href="?c=minutas&a=index" class="dropdown-item">Minuta</a></li>
                 <li><a href="?c=correspondencias&a=index" class="dropdown-item">Correspondencia</a></li>
                 <!--<li class="dropdown-divider"></li>
                Level two dropdown
