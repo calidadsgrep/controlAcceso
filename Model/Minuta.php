@@ -70,6 +70,69 @@ class Minuta
 
 
 
+	public function Validar_entrega()
+    {
+        $puesto_id = $_SESSION['infraestructura'];
+        $fecha = date('Y-m-d');
+        try {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM control_puestos WHERE puesto_id = $puesto_id AND f_entrega='$fecha' AND tramite='entrega'  ORDER BY h_entrega ASC");
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+	public function ObtenerInv($id)
+    {    $id = $_SESSION['infraestructura'];
+        try
+        {
+            $stm = $this->pdo->prepare("SELECT inventarios.* FROM  inventarios WHERE puesto_id = ?");
+            $stm->execute(array($id));
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function Listar($id)
 	{
 		try
