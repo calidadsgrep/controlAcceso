@@ -22,7 +22,7 @@
     <?php echo $_SESSION['rol'] ?>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2022</strong> All rights reserved.
+    <strong>Copyright &copy;2022</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
