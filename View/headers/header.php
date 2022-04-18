@@ -78,13 +78,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       top: 20
     }
   </style>
-
 </head>
-
 <body class="hold-transition layout-top-nav">
-  <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white fixed">
+  <div class="wrapper"><!-- Navbar
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">-->     
+    <nav class="main-header navbar sticky-top navbar-expand-md navbar-light navbar-white">
       <div class="container">
         <a href="#" class="navbar-brand a">
           <img src="View/library/dist/img/logoCensig.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">

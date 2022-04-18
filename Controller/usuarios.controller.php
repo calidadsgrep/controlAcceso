@@ -2,6 +2,7 @@
 require_once 'Model/Seguridad.php';
 require_once 'Model/Usuario.php';
 require_once 'Model/Control.php';
+require_once 'Model/Informe.php';
 
 class UsuariosController{
     
@@ -14,6 +15,8 @@ class UsuariosController{
     public function Dashboard(){
         
         require_once 'View/headers/header.php';
+        $info= new Informe();
+        $ip=$info->Ingreso_Personas();
         $seguridad = new Seguridad(); 
         $modulo= 'usuarios';
         $tipo= $_SESSION['rol'];

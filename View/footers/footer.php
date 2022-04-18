@@ -14,9 +14,8 @@
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer sticky-bottom">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
     <?php echo $_SESSION['rol'] ?>
