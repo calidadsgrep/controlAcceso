@@ -6,11 +6,11 @@ if (!isset($_SESSION['log'])) {
          window.location.href = '../controlAcceso/?error=expire';
        </script>";
 }
- require_once 'Model/Consigna.php';
-   $consignas = new Consigna();
-    $cons= $consignas->Listar();
-    //print_r($cons);
-    $num_mensajes=count($cons);
+require_once 'Model/Consigna.php';
+$consignas = new Consigna();
+$cons = $consignas->Listar();
+//print_r($cons);
+$num_mensajes = count($cons);
 
 ?>
 <!DOCTYPE html>
@@ -79,12 +79,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
   </style>
 </head>
+
 <body class="hold-transition layout-top-nav">
-  <div class="wrapper"><!-- Navbar
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">-->     
+  <div class="wrapper">
+    <!-- Navbar
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
     <nav class="main-header navbar sticky-top navbar-expand-md navbar-light navbar-white">
       <div class="container">
-        <a href="#" class="navbar-brand a">
+        <a href="?c=usuarios&a=dashboard" class="navbar-brand a">
           <img src="View/library/dist/img/logoCensig.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Seguridad</span>
         </a>
@@ -146,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-          <!-- Messages Dropdown Menu --->          
+          <!-- Messages Dropdown Menu --->
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="far fa-comments"></i>
@@ -155,28 +157,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <a href="#" class="dropdown-item">
                 <!-- Message Start -->
-                <?php foreach($cons as $con): ?>
-                <div class="media">
-                  <img src="../../dist/img/user1-128x128.jpg" alt="User" class="img-size-50 mr-3 img-circle">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      <?php echo $con->fullname; ?>
-                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm"><?php echo substr($con->consigna, 0,60); ?></p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> <?php echo $con->fecha_reg; ?></p>
+                <?php foreach ($cons as $con) : ?>
+                  <div class="media">
+                    <img src="../../dist/img/user1-128x128.jpg" alt="User" class="img-size-50 mr-3 img-circle">
+                    <div class="media-body">
+                      <h3 class="dropdown-item-title">
+                        <?php echo $con->fullname; ?>
+                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                      </h3>
+                      <p class="text-sm"><?php echo substr($con->consigna, 0, 60); ?></p>
+                      <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> <?php echo $con->fecha_reg; ?></p>
+                    </div>
                   </div>
-                </div>
-                <?php endforeach;?>
+                <?php endforeach; ?>
                 <!-- Message End -->
               </a>
               <div class="dropdown-divider"></div>
-               <!-- Message End -->
+              <!-- Message End -->
               </a>
               <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item dropdown-footer">Ver Todas</a>
             </div>
-            <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
             <a class="nav-link a" data-toggle="dropdown" href="#">
               <i class="fas fa-user" style="color:green"> <?php echo strtoupper($_SESSION['full_name']); ?><br> <?php echo  $_SESSION['datosinfra']->nombre ?></i>
             </a>
@@ -184,7 +186,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="?c=seguridad&a=logout" class="nav-link"> <i class="fas fa-power-off" style="color:red"></i></a>
           </li>
-
           </li>
 
 
@@ -196,6 +197,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container">
+        <div class="row mb-2">
+  <div class="col-sm-6"></div>
+ <!-- /.col -->
+  <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+      <li class="breadcrumb-item"><a href="?c=usuarios&a=dashboard">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="#">Menu</a></li>
+      <li class="breadcrumb-item active">Dash</li>
+    </ol>
+  </div><!-- /.col -->
+</div><!-- /.row -->
           <script>
             $(function() {
               //Initialize Select2 Elements

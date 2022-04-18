@@ -11,7 +11,8 @@ class InformesController{
     }
     
     public function Personas(){   
-        $persona=$this->model->Ingreso_Personas();            
+        $persona=$this->model->Ingreso_Personas(); 
+                    
         require_once 'View/informe/personas.php';          
     }
 }
