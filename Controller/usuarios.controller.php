@@ -1,4 +1,5 @@
 <?php
+
 require_once 'Model/Seguridad.php';
 require_once 'Model/Usuario.php';
 require_once 'Model/Control.php';
@@ -12,11 +13,11 @@ class UsuariosController{
         $this->model = new Usuario();
     }
     
-    public function Dashboard(){
-        
+    public function Dashboard(){        
         require_once 'View/headers/header.php';
         $info= new Informe();
         $ip=$info->Ingreso_Personas();
+        $inmuebles=$info->Cliente($_SESSION['infraestructura']);
         $seguridad = new Seguridad(); 
         $modulo= 'usuarios';
         $tipo= $_SESSION['rol'];

@@ -7,6 +7,8 @@
 //echo "<pre>";
 //print_r($ip);
 $cant_ing = count($ip);
+
+$cant_inmueble =count($inmuebles);
 //echo "</pre>";
 ?>
 <!-- /.content-header -->
@@ -32,13 +34,13 @@ $cant_ing = count($ip);
     <!-- small card -->
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>44</h3>
+        <h3><?php echo  $cant_inmueble ?></h3>
         <p>Inmuebles de Registrados</p>
       </div>
       <div class="icon">
         <i class="fas fa-building"></i>
       </div>
-      <a href="#" class="small-box-footer">
+      <a href="#" class="small-box-footer" onclick="Clientes()">
         Más info <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -70,6 +72,18 @@ $cant_ing = count($ip);
     $.ajax({
       type: "POST",
       url: '?c=informes&a=personas',
+      // data: 'solicitante=' + val,
+      success: function(resp) {
+        $('#info').html(resp);
+        $('#respuesta').html("");
+      }
+    });
+  }
+  function Clientes() {
+    $('#info').html("<h5>Cargando Complementos</h5>");
+    $.ajax({
+      type: "POST",
+      url: '?c=informes&a=clientes',
       // data: 'solicitante=' + val,
       success: function(resp) {
         $('#info').html(resp);

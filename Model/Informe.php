@@ -41,14 +41,26 @@ class Informe
     public function Tipo_Inmueble($id)
     {
         try {
-           $ip = $this->pdo->prepare("SELECT tipo_inmueble.tipo FROM  tipo_inmueble WHERE id=$id ");
-           $ip->execute();
+            $ip = $this->pdo->prepare("SELECT tipo_inmueble.tipo FROM  tipo_inmueble WHERE id=$id ");
+            $ip->execute();
             return $ip->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-
-
+    public function Cliente($id)
+    {
+        try {
+            $ip = $this->pdo->prepare("SELECT CONCAT(usuarios.nombres,' ',usuarios.apellidos) as fullname, tipo_inmueble.tipo,tipo_inmueble ,inmuebles.* 
+           FROM  inmuebles, tipo_inmueble, usuarios
+           WHERE inmuebles.infra_id=$id
+           AND  inmuebles.tipo_inmueble= tipo_inmueble.id
+           AND usuarios.id=inmuebles.usuario_id");
+            $ip->execute();
+            return $ip->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

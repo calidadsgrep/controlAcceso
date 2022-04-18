@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'Model/Informe.php';
 
 class InformesController{
@@ -14,5 +14,10 @@ class InformesController{
         $persona=$this->model->Ingreso_Personas(); 
                     
         require_once 'View/informe/personas.php';          
+    }
+    public function Clientes(){ 
+         
+        $cliente=$this->model->Cliente($_SESSION['infraestructura']);                     
+        require_once 'View/informe/cliente.php';          
     }
 }

@@ -1,6 +1,6 @@
     <?php
     sleep(1);
-   /*echo '<pre>';
+    /*echo '<pre>';
     print_r($persona);
     echo '</pre>';*/
     ?>
