@@ -39,15 +39,15 @@
               </div> 
               
               <div class="row">
-              <div class="col-md-4">
-                    <label for="nit">Correo</label>
+              <div class="col-md-5">
+                    <label for="nit">Confirmar Correo de Notificación</label>
                     <div class="form-group">
                         <input type="mail" id="correo" name="correo" class="form-control" placeholder=""  value="<?php echo $alm->correo ?>">
                     </div>
                     <!-- /form-group -->
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="nit">Identificación interna</label>
                     <div class="form-group">
                         <input type="text" id="numero" name="numero" class="form-control" placeholder=""  value="<?php echo $alm->numero ?>">

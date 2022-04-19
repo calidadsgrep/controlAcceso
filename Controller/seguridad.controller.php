@@ -39,6 +39,7 @@ class SeguridadController{
       if ($result_user == 1) {  
 
         $_SESSION['log']=true; 
+        $_SESSION['start'] = time();
         $_SESSION['user']= $user[0];
         $_SESSION['full_name']= $user[0]['nombres'].' '.$user[0]['apellidos'];
         $_SESSION['rol'] = $user[0]['tipo_usuario']; 

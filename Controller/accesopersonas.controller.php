@@ -61,6 +61,7 @@ class AccesopersonasController{
            
       $id = $_REQUEST['id'];
       $sali=  $this->model->ObtenerVisita($id);
+      $tools= $this->model->VerToolsalida($id);
       require_once 'View/control/salida.php'; 
 
     }
@@ -74,9 +75,19 @@ class AccesopersonasController{
         $alm->svehiculo = $_REQUEST['svehiculo'];
         $alm->observacion = $_REQUEST['observacion'];
         $alm->funcionario =$_REQUEST['funcionario'];
-        $alm->objetos =$_REQUEST['objetos'];
+        $alm->objetos ='n/a';
+        $alm->salida =$_REQUEST['salida'];
         
        $this->model->RegistrarSalida($alm);
+       if($alm->salida >= 1){
+
+        foreach($alm->salida as $key=>$salidas){
+                 echo $salidas ;
+                 echo $key ;
+        $this->model->ToolSalida($key, $salidas);  
+        }
+
+       }
          
   
       }
@@ -96,10 +107,12 @@ class AccesopersonasController{
     
      public function HerramientasAdd(){
         $alm = new Accesopersona();
-        sleep(5);        
+        sleep(1);        
         $alm->item = $_REQUEST['item'];
         $alm->cantidad = $_REQUEST['cantidad'];
         $alm->visita = $_REQUEST['visita'];
+        $alm->tipo = $_REQUEST['tipo'];
+        $alm->estado = '1';
 
         if ($alm->item > 1) {
             # code...

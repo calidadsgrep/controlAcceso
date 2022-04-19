@@ -1,17 +1,19 @@
 <?php
 session_start();
 date_default_timezone_set('America/Bogota');
-if (!isset($_SESSION['log'])) {
+if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
+  session_unset();
+  session_destroy();
   echo "<script type='text/javascript'>  
-         window.location.href = '../controlAcceso/?error=expire';
-       </script>";
+            alert('LA APLICACION SE CERRARA POR INACTIVIDAD');
+            window.location.href = '../controlAcceso/?error=expire';
+          </script>";
 }
 require_once 'Model/Consigna.php';
 $consignas = new Consigna();
 $cons = $consignas->Listar();
 //print_r($cons);
 $num_mensajes = count($cons);
-
 ?>
 <!DOCTYPE html>
 <!--
@@ -197,17 +199,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container">
-        <div class="row mb-2">
-  <div class="col-sm-6"></div>
- <!-- /.col -->
-  <div class="col-sm-6">
-    <ol class="breadcrumb float-sm-right">
-      <li class="breadcrumb-item"><a href="?c=usuarios&a=dashboard">Inicio</a></li>
-      <li class="breadcrumb-item"><a href="#">Menu</a></li>
-      <li class="breadcrumb-item active">Dash</li>
-    </ol>
-  </div><!-- /.col -->
-</div><!-- /.row -->
+          <div class="row mb-2">
+            <div class="col-sm-6"></div>
+            <!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="?c=usuarios&a=dashboard">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Menu</a></li>
+                <li class="breadcrumb-item active">Dash</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
           <script>
             $(function() {
               //Initialize Select2 Elements

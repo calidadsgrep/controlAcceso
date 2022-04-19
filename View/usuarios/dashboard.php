@@ -1,14 +1,14 @@
 <div class="row mb-2">
   <div class="col-sm-6">
-    <h1 class="m-0"> CENSIG</h1> <small>Panel de Control</small>
+    <h1 class="m-0">CENSIG</h1> <small>::Panel de Control::</small>
   </div>
 </div><!-- /.row -->
 <?php
 //echo "<pre>";
 //print_r($ip);
 $cant_ing = count($ip);
-
-$cant_inmueble =count($inmuebles);
+$cant_inmueble = count($inmuebles);
+$cant_corr = count($cor);
 //echo "</pre>";
 ?>
 <!-- /.content-header -->
@@ -18,7 +18,7 @@ $cant_inmueble =count($inmuebles);
     <div class="small-box bg-info">
       <div class="inner">
         <h3><?php echo $cant_ing ?></h3>
-        <p>Personas en Sitio</p>
+        <p>Personas Registro Diario</p>
       </div>
       <div class="icon">
         <i class="fas fa-users"></i>
@@ -50,20 +50,20 @@ $cant_inmueble =count($inmuebles);
     <!-- small card -->
     <div class="small-box bg-danger">
       <div class="inner">
-        <h3>65</h3>
-        <p> Correspondencia</p>
+        <h3><?php echo  $cant_corr ?></h3>
+        <p> Correspondencia Sin Entregar</p>
       </div>
       <div class="icon">
         <i class="fas fa-envelope"></i>
       </div>
-      <a href="#" class="small-box-footer">
+      <a href="#" onclick="Correspondencia()" class="small-box-footer">
         Más info <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>
   </div>
   <!-- ./col -->
 
-  <div class="col-lg-12 col-1 text-center" id="info">   </div>
+  <div class="col-lg-12 col-1 text-center" id="info"></div>
 </div>
 
 <script>
@@ -91,4 +91,20 @@ $cant_inmueble =count($inmuebles);
       }
     });
   }
+  function Correspondencia() {
+    $('#info').html("<h5>Cargando Complementos</h5>");
+    $.ajax({
+      type: "POST",
+      url: '?c=informes&a=correspondencia',
+      // data: 'solicitante=' + val,
+      success: function(resp) {
+        $('#info').html(resp);
+        $('#respuesta').html("");
+      }
+    });
+  }
+  
+
+
+
 </script>

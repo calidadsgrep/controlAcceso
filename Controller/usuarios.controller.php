@@ -18,6 +18,8 @@ class UsuariosController{
         $info= new Informe();
         $ip=$info->Ingreso_Personas();
         $inmuebles=$info->Cliente($_SESSION['infraestructura']);
+        $cor = $info->Correspondencias();
+
         $seguridad = new Seguridad(); 
         $modulo= 'usuarios';
         $tipo= $_SESSION['rol'];

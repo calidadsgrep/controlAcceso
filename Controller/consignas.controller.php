@@ -39,6 +39,7 @@ class ConsignasController{
          $cons->infraestructura_id=$_REQUEST['infraestructura_id'];
          $cons->fecha_reg=date('Y-m-d');
          $cons->dirigido_a=$_REQUEST['dirigido_a'];
+         $cons->duracion=$_REQUEST['duracion'];
 
          $cons->id > 0 
             ? $this->model->Actualizar($cons)

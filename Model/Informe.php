@@ -63,4 +63,43 @@ class Informe
             die($e->getMessage());
         }
     }
+    public function Habitante($id)
+    {
+        try {
+            $ip = $this->pdo->prepare("SELECT CONCAT(usuarios.nombres,' ',usuarios.apellidos) as fullname
+           FROM usuarios
+           JOIN usu_inmu
+           ON usu_inmu.usuario_id=usuarios.id
+           WHERE usu_inmu.inmueble_id=$id
+           AND   usuarios.tipo_usuario = '7'
+           ");
+            $ip->execute();
+            return $ip->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function Correspondencias()
+    { 
+        $infra=$_SESSION['infraestructura'];
+        try {
+            $ip = $this->pdo->prepare("SELECT correspondencias.*, inmuebles.numero, tipo_inmueble.tipo
+            FROM correspondencias,inmuebles,tipo_inmueble
+            WHERE
+            correspondencias.destino=inmuebles.id
+            AND
+             inmuebles.tipo_inmueble= tipo_inmueble.id
+            AND
+             inmuebles.infra_id= $infra
+            AND
+            correspondencias.guarda_entrega IS NULL");
+
+            $ip->execute();
+            return $ip->fetchAll(PDO::FETCH_OBJ);
+
+        }catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

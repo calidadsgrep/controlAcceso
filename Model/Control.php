@@ -213,11 +213,31 @@ class Accesopersona
 
 			$sql = "UPDATE visitas SET  objetos_sal='$objetos', user_sal='$user_sal', asunto_sal='$asunto_sal',  fecha_sal='$fecha', hora_sal='$hora', vehiculo_sal='$vehiculo_sal',observacion='$observacion' WHERE id ='$id'";
 			$this->pdo->prepare($sql)->execute();
+
 		} catch (Exception $e) {
 			die($e->getMessage());
 			//throw $th;
 		}
 	}
+
+	public function ToolSalida($key, $salidas)
+	{
+		$estado = $salidas;
+		$id = $key;
+		try {
+
+			$sql = "UPDATE  herramientas SET estado=$estado  WHERE id ='$id'";
+			$this->pdo->prepare($sql)->execute();
+			
+		} catch (Exception $e) {
+			die($e->getMessage());
+			//throw $th;
+		}
+	}
+
+
+
+
 
 	public function Add_herramienta($data)
 	{
@@ -225,8 +245,8 @@ class Accesopersona
 		foreach ($data->cantidad as $key => $cantidades) {
 			# code...
 			try {
-				$sql = "INSERT INTO herramientas (item ,cantidad, visita_id)
-		        VALUES (?, ?, ?)";
+				$sql = "INSERT INTO herramientas (item ,cantidad, visita_id,tipo,estado)
+		        VALUES (?, ?, ?, ?, ?)";
 
 				$this->pdo->prepare($sql)
 					->execute(
@@ -234,6 +254,8 @@ class Accesopersona
 							$data->item[$key],
 							$data->cantidad = $cantidades,
 							$data->visita,
+							$data->tipo[$key],
+							$data->estado,
 						)
 					);
 			} catch (Exception $e) {
@@ -253,6 +275,20 @@ class Accesopersona
 		die($e->getMessage());
 	}
 
+
+ }
+
+
+ public function VerToolsalida($id){
+
+	try {
+		$result = array();
+		$stm = $this->pdo->prepare("SELECT * FROM  herramientas WHERE visita_id=$id AND tipo='Herramienta' AND estado='1' ");
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);
+	} catch (Exception $e) {
+		die($e->getMessage());
+	}
 
  }
 

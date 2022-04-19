@@ -63,14 +63,15 @@ class Consigna
 	{
 
 
-		$cons = "INSERT INTO consignas(consigna, infraestructura_id , fecha_reg, dirigido_a) 
-	  		VALUES (?, ?, ?, ?)";
+		$cons = "INSERT INTO consignas(consigna, infraestructura_id , fecha_reg, dirigido_a, duracion) 
+	  		VALUES (?, ?, ?, ?, ?)";
 		$this->pdo->prepare($cons)->execute(
 			array(
 				$data->consigna,
 				$data->infraestructura_id,
 				$data->fecha_reg,
 				$data->dirigido_a,
+				$data->duracion,
 			)
 
 		);

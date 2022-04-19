@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <th colspan="3">
-                                    AUXILIAR:
+                                    VIGILANTE:
                                     <?php echo strtoupper($_SESSION['full_name']) ?>
                                 </th>
                                 <th colspan="1">

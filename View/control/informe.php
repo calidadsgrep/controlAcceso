@@ -21,27 +21,35 @@
                             <li><?php echo $info->tipo . ' ' . $info->numero ?></li>
                         </ul>
                     </li>
-                    <li>VEHICULO:
-                        <ul>
-                            <li>Tipo: <?php echo $info->tipo_vehiculo ?></li>
-                            <li>Placa: <?php echo $info->placa ?></li>
-                            <li>Color: <?php echo $info->color ?></li>
-                        </ul>
-                    </li>
+                    <?php if ($info->tipo_vehiculo != "") : ?>
+                        <li>VEHICULO:
+                            <ul>
+                                <li>Tipo: <?php echo $info->tipo_vehiculo ?></li>
+                                <li>Placa: <?php echo $info->placa ?></li>
+                                <li>Color: <?php echo $info->color ?></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 </ul>
-                 <table class="table table-bordered table-sm">
-                     <tr><th colspan='2'>Elementos Registrados <small>materiales-herramientas-etc</small></th></tr>
-                     <tr>
-                         <th style="width: 5%;">Item</th>
-                         <th style="width: 5%;">Cantidad</th>                         
-                     </tr>
-                     <?php foreach($tools as $tool):   ?>
-                     <tr>
-                         <td style="width: 5%;"><?php echo $tool->item  ?></td>
-                         <td style="width: 5%;"><?php echo $tool->cantidad  ?></td>                         
-                     </tr>
-                     <?php endforeach;   ?>
-                 </table>
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th colspan='2'>Elementos Registrados <small>materiales-herramientas-etc</small></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%;">Item</th>
+                        <th style="width: 5%;">Cantidad</th>
+                        <th style="width: 5%;">Estado</th>
+                    </tr>
+                    <?php foreach ($tools as $tool) :   ?>
+                        <tr>
+                            <td style="width: 5%;"><?php echo $tool->item  ?></td>
+                            <td style="width: 5%;"><?php echo $tool->cantidad  ?></td>
+                            <td style="width: 5%;       "><?php
+                                                            echo  $tool->estado == 0 ? 'Salio' : 'No Salio';
+                                                            ?></td>
+                        </tr>
+                    <?php endforeach;   ?>
+                </table>
             </div>
             <div class="timeline-footer">
                 Registrado por:
@@ -79,8 +87,9 @@
             <h3 class="timeline-header">SALIDA</h3>
 
             <div class="timeline-body">
-                <li>SALIDA DEL VEHICULO:
-                    <?php if ($info->vehiculo_sal == 'si') : ?>
+
+                <?php if ($info->tipo_vehiculo != ""  && $info->vehiculo_sal == 'si') : ?>
+                    <li>SALIDA DEL VEHICULO:
                         <ul>
                             <li>Tipo: <?php echo $info->tipo_vehiculo ?></li>
                             <li>Placa: <?php echo $info->placa ?></li>

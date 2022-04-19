@@ -7,14 +7,23 @@ if (isset($_REQUEST['id'])) {
 }
 $resultado = $this->model->Ver($identidad);
 $visitas = $this->model->Visitas($resultado->id);
-//print_r($visitas[0]->asunto_sal);
-
+$ultvis = $this->model->Ult_Visitas($resultado->id);
+/*echo'<pre>';
+print_r(count($ultvis));
+echo'</pre>';*/
 if (@$visitas[0]->asunto_sal == "Salida") {
 
   $accion = "Salida";
 } else {
   $accion = "Acciones";
 }
+ if(count($ultvis)==0){
+     $estado='';
+ }else{
+     $estado='disabled';
+ }
+
+
 ?>
 <!--<div class="container">-->
 <div class="row">
@@ -36,7 +45,7 @@ if (@$visitas[0]->asunto_sal == "Salida") {
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th style="width: 10%;" >Asunto</th>
+                  <th style="width: 10%;">Asunto</th>
                   <th style="width: 25%;">Fecha/Hora</th>
                   <th style="width: 10%;">Destino</th>
                   <th style="width: auto;"> <i title="Info" data-toggle="popover" data-trigger="hover" data-content="Las acciones que se pueden realizar para el control de acceso son: registrar la salida, ver datos del vehiculo, ver y registrar los datos de herramientas" class="fa fa-info-circle"></i><?php echo $accion ?> </th>
@@ -44,7 +53,7 @@ if (@$visitas[0]->asunto_sal == "Salida") {
               </thead>
               <tbody><?php foreach ($visitas as $visita) : ?>
                   <tr>
-                    <td><a onclick="Informe('<?php echo $visita->id ?>')" > <i class="fa fa-address-card"></i> <?php echo $visita->asunto ?></a> </td>
+                    <td><a onclick="Informe('<?php echo $visita->id ?>')"> <i class="fa fa-address-card"></i> <?php echo $visita->asunto ?></a> </td>
                     <td><?php echo $visita->fecha . '<br>' . $visita->hora ?></td>
                     <td><?php echo $visita->tipo . ' ' . $visita->numero ?></td>
                     <td>
@@ -53,8 +62,8 @@ if (@$visitas[0]->asunto_sal == "Salida") {
                       <?php else : ?>
                         <a href="" onclick="Salida('<?php echo $visita->id ?>')" data-toggle="modal" data-target="#modalCar"> <i title="Info" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="REGISTRO DE SALIDA" class="fa fa-user-times"></i></a>
                         <!--<a href="" data-toggle="modal" data-target="#modalCar"> <i title="Info" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="VER DATOS DEL VEHICULO" class="fa fa-car"></i></a>-->
-                        <a  onclick="Herramientas('<?php echo $visita->id ?>')" >  <i title="Info" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="REGISTRAR HERRAMIENTAS" class="fa fa-wrench"></i></a>
-                      <?php  endif; ?>
+                        <a onclick="Herramientas('<?php echo $visita->id ?>')"> <i title="Info" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="REGISTRAR HERRAMIENTAS" class="fa fa-wrench"></i></a>
+                      <?php endif; ?>
                       <?php //echo $visita->tipo_vehiculo . ' ' . $visita->placa . ' ' . $visita->color 
                       ?>
                     </td>
@@ -70,11 +79,11 @@ if (@$visitas[0]->asunto_sal == "Salida") {
     </div>
     <!-- /.widget-user -->
   </div>
-  <?php if (!isset($visita->asunto_sal) or $visita->asunto_sal == 'Salida') : ?>
+  <?php if (!isset($visita->asunto_sal) or $visita->asunto_sal == 'Salida'): ?>
     <div class="col-md-7">
       <div class="card">
         <div class="card-header">
-          INGRESE LOS DATOS DE INGRESO/SALIDA
+          INGRESE LOS DATOS DE INGRESO
         </div>
         <div class="card-body">
           <div class="col-md-12">
@@ -122,7 +131,7 @@ if (@$visitas[0]->asunto_sal == "Salida") {
                     <label for="">Tipo</label>
                     <select name="tipo" id="tipo" class="form-control" required>
                       <option value="">seleccionar</option>
-                      <option value="Automobil">Automobil</option>
+                      <option value="Automovil">Automovil</option>
                       <option value="Motocicleta">Motocicleta</option>
                       <option value="bicicleta">bicicleta</option>
                     </select>
@@ -145,21 +154,22 @@ if (@$visitas[0]->asunto_sal == "Salida") {
         </div>
         </form>
         <div class="card-footer">
-          <button type="button" class="btn btn-danger" id="upSubmit"><i class="fa fa-save"></i> Guardar</button>
+          <button type="button" class="btn btn-danger" id="upSubmit" <?php echo $estado ?> ><i class="fa fa-save"></i> Guardar</button>
           <div class="text-danger align-middle" id="Msg"></div>
         </div>
       </div>
-      <div id="informe" class="informe">   <div id="herramientas" class="herramientas">      
+      <div id="informe" class="informe">
+        <div id="herramientas" class="herramientas">
+        </div>
       </div>
-    </div>
-  <?php endif; ?>
+    <?php endif; ?>
 
-</div>
+    </div>
 </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="modalCar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">REGISTRO DE SALIDA</h5>
@@ -198,14 +208,17 @@ if (@$visitas[0]->asunto_sal == "Salida") {
     height: auto;
     width: 150px;
   }
+  .modal-lg { max-width: 80% !important; }
+
+
 </style>
 
 <script>
   function Herramientas(id) {
     $('#herramientas').html(
-          '<div class="loading"><img src="view/img/gifs/cargando-loading-009.gif" alt="loading" />&nbsp;&nbsp;Procesando, por favor espere...desliza hacia abajo</div>'
-        ).fadeIn("300");
-        $.ajax({
+      '<div class="loading"><img src="view/img/gifs/cargando-loading-009.gif" alt="loading" />&nbsp;&nbsp;Procesando, por favor espere...desliza hacia abajo</div>'
+    ).fadeIn("300");
+    $.ajax({
       data: {
         id: id
       },
@@ -224,8 +237,8 @@ if (@$visitas[0]->asunto_sal == "Salida") {
 
   function Informe(id) {
     $('#informe').html(
-          '<div class="loading"><img src="view/img/gifs/cargando-loading-009.gif" alt="loading" />&nbsp;&nbsp;Procesando, por favor espere...desliza hacia abajo</div>'
-        ).fadeIn("300");
+      '<div class="loading"><img src="view/img/gifs/cargando-loading-009.gif" alt="loading" />&nbsp;&nbsp;Procesando, por favor espere...desliza hacia abajo</div>'
+    ).fadeIn("300");
     $.ajax({
       data: {
         id: id
