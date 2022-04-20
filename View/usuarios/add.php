@@ -129,7 +129,7 @@
                     <div class="col-sm-6">
                     <div class="form-group">
                     <label>Tipo Usuario</label>
-                    <select name="tipo_usuario" id="tipo_usuario" class="form-control" require >
+                    <select name="tipo_usuario" id="tipo_usuario" class="form-control" required >
                       <?php $tipos=$this->model->Tipo_usuarios();?>
                       <option value="">Seleccionar </option>
                       <?php foreach($tipos as $tipo):?>
@@ -183,8 +183,7 @@
          url: "?c=usuarios&a=Registrar",
          success: function(data){
              alert('EL REGISTRO SE CREO CON EXITO');
-             window.location = '?c=usuarios&a=personas';
-             
+             window.location = '?c=usuarios&a=personas';             
          }
 	});
 });

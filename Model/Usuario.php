@@ -82,11 +82,12 @@ class Usuario
 		$tsangre = $data->tsangre;
 		$alergias = $data->alergias;
 		$mreducida = $data->mreducida;
+		$tipo_usuario = $data->tipo_usuario;
 
 
 		try {
 			//code...
-			$sql = "UPDATE usuarios SET   mreducida = '$mreducida', tsangre = '$tsangre' , genero = '$genero',  alergias = '$alergias' , fnacimiento='$fnacimiento', infraestructura_id='$infraestructura_id', tipo_identificacion='$tipo_identificacion', num_identificacion='$identificacion', nombres='$nombre', apellidos='$apellidos',telefono='$telefono', correo='$correo', direccion='$direccion', foto='$foto', modified='$actualizacion' WHERE id ='$id'";
+			$sql = "UPDATE usuarios SET  tipo_usuario = '$tipo_usuario', mreducida = '$mreducida', tsangre = '$tsangre' , genero = '$genero',  alergias = '$alergias' , fnacimiento='$fnacimiento', infraestructura_id='$infraestructura_id', tipo_identificacion='$tipo_identificacion', num_identificacion='$identificacion', nombres='$nombre', apellidos='$apellidos',telefono='$telefono', correo='$correo', direccion='$direccion', foto='$foto', modified='$actualizacion' WHERE id ='$id'";
 			$this->pdo->prepare($sql)->execute();
 		} catch (Exception $e) {
 			die($e->getMessage());
@@ -216,11 +217,11 @@ class Usuario
 			}
 			if ($_SESSION['rol'] == 3) {
 				# code...
-				$stm = $this->pdo->prepare("SELECT * FROM tipo_usuarios WHERE tipo IN('Propietario','Inquilino','Administrador') ");
+				$stm = $this->pdo->prepare("SELECT * FROM tipo_usuarios WHERE tipo IN('Propietario','Inquilino') ");
 			}
 			if ($_SESSION['rol'] == 5) {
 				# code...
-				$stm = $this->pdo->prepare("SELECT * FROM tipo_usuarios WHERE tipo IN('Vigilante','Supervisor', 'Dir Operativo') ");
+				$stm = $this->pdo->prepare("SELECT * FROM tipo_usuarios WHERE tipo IN('Administrador','Vigilante','Supervisor', 'Dir Operativo') ");
 			}
 
 			$stm->execute();
