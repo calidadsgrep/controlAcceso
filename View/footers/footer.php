@@ -1,4 +1,4 @@
-
+ 
 <!-- jQuery -->
 <script src="View/library/js/foto.js"></script>
 </div>

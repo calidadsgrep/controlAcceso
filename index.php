@@ -1,13 +1,13 @@
 <?php
+//mostrar errores
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+//mostrar errores
+
 require_once 'Model/database.php';
 //$parameter=$_REQUEST['c'];
     $controller = 'seguridad'; 
-
-
-
 // Todo esta lógica hara el papel de un FrontController
 if (!isset($_REQUEST['c'])) {
     require_once "controller/$controller.controller.php";
@@ -18,7 +18,6 @@ if (!isset($_REQUEST['c'])) {
     // Obtenemos el controlador que queremos cargar
     $controller = strtolower($_REQUEST['c']);
     $accion = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';
-
     // Instanciamos el controlador
     require_once "controller/$controller.controller.php";
     $controller = ucwords($controller) . 'Controller';
